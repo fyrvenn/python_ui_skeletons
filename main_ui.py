@@ -41,9 +41,15 @@ class MainClass(Frame):
         self.l_header = Label(self.frame_header, width=80, height=5, font=font_std + " bold", text="HEADER",
                               bg="dark green")
 
+        r_var = BooleanVar()
+        r_var.set(0)
+        self.rbtn1 = Radiobutton(self.frame_rb, text='1', variable=r_var, value=0)
+        self.rbtn2 = Radiobutton(self.frame_rb, text='2', variable=r_var, value=1)
+        self.rbtn3 = Radiobutton(self.frame_rb, text='3', variable=r_var, value=2)
+
         self.l_chb = Label(self.frame_chb, width=25, height=30, text="CHECKBOX", bg="red")
-        self.l_rb = Label(self.frame_rb, width=25, height=30, text="RADIOBUTTON", bg="light gray")
-        self.l_l = Label(self.frame_cb, width=25, text="Выбрать:", bg="light blue")
+        self.l_rb = Label(self.frame_rb, width=25, height=30, text="RADIOBUTTON", bg="light green")
+        self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="light blue")
 
         self.main_btn = Button(self.frame_footer, font=font_std, bg="light gray", width=20, height=2, text=u"Открыть файл",
                                command=self.open_file)
@@ -66,8 +72,12 @@ class MainClass(Frame):
         self.error_btn.pack(anchor='center', side='bottom')
 
         self.text_win.pack(anchor=W, expand=1, fill=BOTH)
-        self.l_l.pack()
+        self.l_cbb.pack()
         self.cbb.pack(side='top', fill=BOTH)
+
+        self.rbtn1.pack(side=TOP, anchor=NW)
+        self.rbtn2.pack(side=TOP, anchor=NW)
+        self.rbtn3.pack(side=TOP, anchor=NW)
 
         self.l_header.pack()
         self.l_chb.pack()
