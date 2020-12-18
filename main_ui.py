@@ -21,7 +21,7 @@ def return_error():
 
 class MonthList:
     def __init__(self, r_var, name, parent, i):
-        self.rb = Radiobutton(parent, text=name, variable=r_var, value=i)
+        self.rb = Radiobutton(parent, text=name, bg='light yellow', variable=r_var, value=i)
         self.rb.pack(side=TOP, anchor=NW)
 
 
@@ -37,12 +37,12 @@ class MainClass(Frame):
         # Objects
         self.frame_header = Frame(self.master, bg='green', bd=5)
         self.frame_chb = Frame(self.master, bg='red', bd=5)
-        self.frame_rb = Frame(self.master, bg='light gray', bd=5)
-        self.frame_cb = Frame(self.master, bg='light blue', bd=5)
-        self.frame_win = Frame(self.master, bg='gray', bd=5)
+        self.frame_rb = Frame(self.master, bg='light yellow', bd=5)
+        self.frame_cb = Frame(self.master, bg='violet', bd=5)
+        self.frame_win = Frame(self.master, bg='dark blue', bd=5)
         self.frame_footer = Frame(self.master, bg='white', bd=5)
 
-        self.text_win = Text(self.frame_win, font='Courier', width=30, height=15, bg='white')
+        self.text_win = Text(self.frame_win, font='Courier', width=30, height=15, bg='light blue')
 
         self.cbb = ttk.Combobox(self.frame_cb, width=3, values='')
 
@@ -55,14 +55,13 @@ class MainClass(Frame):
         self.month_list = list()
         i = 0
         for month in months_str[1::]:
-            print(month)
             i += 1
             rb = MonthList(r_var, month, self.frame_rb, i)
             self.month_list.append(rb)
 
-        self.l_chb = Label(self.frame_chb, width=25, height=30, text="Checkbox", bg="red")
-        self.l_rb = Label(self.frame_rb, width=25, height=15, text="Radiobutton", bg="light green")
-        self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="light blue")
+        self.l_chb = Label(self.frame_chb, width=25, height=30, text="Checkbox", bg="dark red")
+        self.l_rb = Label(self.frame_rb, width=25, height=15, text="Radiobutton", bg="yellow")
+        self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="dark violet")
 
         self.main_btn = Button(self.frame_footer, font=font_std, bg="light gray", width=20, height=2, text=u"Открыть файл",
                                command=self.open_file)
