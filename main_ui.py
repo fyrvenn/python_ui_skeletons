@@ -4,6 +4,8 @@ from tkinter import *
 import tkinter.messagebox as mbox
 from tkinter import ttk
 from tkinter import filedialog as fd
+from datetime import datetime
+import calendar
 
 font_std = "Helvetica 12"
 
@@ -15,6 +17,12 @@ def quit_prog():
 def return_error():
     mbox.showwarning(title=u"⚠ ️Error", message=u"Написано же:\nне нажимать!")
     sys.exit(1)
+
+
+class MonthList:
+    def __init__(self, r_var, name, parent, i):
+        self.rb = Radiobutton(parent, text=name, variable=r_var, value=i)
+        self.rb.pack(side=TOP, anchor=NW)
 
 
 class MainClass(Frame):
@@ -43,12 +51,17 @@ class MainClass(Frame):
 
         r_var = BooleanVar()
         r_var.set(0)
-        self.rbtn1 = Radiobutton(self.frame_rb, text='1', variable=r_var, value=0)
-        self.rbtn2 = Radiobutton(self.frame_rb, text='2', variable=r_var, value=1)
-        self.rbtn3 = Radiobutton(self.frame_rb, text='3', variable=r_var, value=2)
+        months_str = calendar.month_name
+        self.month_list = list()
+        i = 0
+        for month in months_str[1::]:
+            print(month)
+            i += 1
+            rb = MonthList(r_var, month, self.frame_rb, i)
+            self.month_list.append(rb)
 
-        self.l_chb = Label(self.frame_chb, width=25, height=30, text="CHECKBOX", bg="red")
-        self.l_rb = Label(self.frame_rb, width=25, height=30, text="RADIOBUTTON", bg="light green")
+        self.l_chb = Label(self.frame_chb, width=25, height=30, text="Checkbox", bg="red")
+        self.l_rb = Label(self.frame_rb, width=25, height=15, text="Radiobutton", bg="light green")
         self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="light blue")
 
         self.main_btn = Button(self.frame_footer, font=font_std, bg="light gray", width=20, height=2, text=u"Открыть файл",
@@ -74,10 +87,6 @@ class MainClass(Frame):
         self.text_win.pack(anchor=W, expand=1, fill=BOTH)
         self.l_cbb.pack()
         self.cbb.pack(side='top', fill=BOTH)
-
-        self.rbtn1.pack(side=TOP, anchor=NW)
-        self.rbtn2.pack(side=TOP, anchor=NW)
-        self.rbtn3.pack(side=TOP, anchor=NW)
 
         self.l_header.pack()
         self.l_chb.pack()
