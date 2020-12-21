@@ -4,7 +4,6 @@ from tkinter import *
 import tkinter.messagebox as mbox
 from tkinter import ttk
 from tkinter import filedialog as fd
-from datetime import datetime
 import calendar
 
 font_std = "Helvetica 12"
@@ -38,16 +37,16 @@ class MainClass(Frame):
         self.frame_header = Frame(self.master, bg='green', bd=5)
         self.frame_chb = Frame(self.master, bg='red', bd=5)
         self.frame_rb = Frame(self.master, bg='light yellow', bd=5)
-        self.frame_cb = Frame(self.master, bg='violet', bd=5)
+        self.frame_cb = Frame(self.master, bg='pink', bd=5)
         self.frame_win = Frame(self.master, bg='dark blue', bd=5)
-        self.frame_footer = Frame(self.master, bg='white', bd=5)
+        self.frame_footer = Frame(self.master, bg='dark violet', bd=5)
 
         self.text_win = Text(self.frame_win, font='Courier', width=30, height=15, bg='light blue')
 
         self.cbb = ttk.Combobox(self.frame_cb, width=3, values='')
 
-        self.l_header = Label(self.frame_header, width=80, height=5, font=font_std + " bold", text="HEADER",
-                              bg="dark green")
+        self.l_header = Label(self.frame_header, width=80, height=5, font=font_std + " italic bold", text="HEADER",
+                              bg="dark green", fg="light green")
 
         r_var = BooleanVar()
         r_var.set(0)
@@ -61,15 +60,15 @@ class MainClass(Frame):
 
         self.l_chb = Label(self.frame_chb, width=25, height=30, text="Checkbox", bg="dark red")
         self.l_rb = Label(self.frame_rb, width=25, height=15, text="Radiobutton", bg="yellow")
-        self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="dark violet")
+        self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="magenta")
 
-        self.main_btn = Button(self.frame_footer, font=font_std, bg="light gray", width=20, height=2, text=u"Открыть файл",
-                               command=self.open_file)
-        self.error_btn = Button(self.frame_footer, font=font_std + " bold", bg="light gray", fg="red", width=20,
+        self.main_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2, text=u"Открыть файл",
+                               fg="white", command=self.open_file)
+        self.error_btn = Button(self.frame_footer, font=font_std + " bold", bg="white", fg="red", width=20,
                                 height=2,
                                 text=u"Не нажимать!!!", command=return_error)
-        self.quit_btn = Button(self.frame_footer, font=font_std, bg="light gray", width=20, height=2, text=u"Выход",
-                               command=quit_prog)
+        self.quit_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2, text=u"Выход",
+                               fg="white", command=quit_prog)
 
         # Pack
         self.frame_header.pack(side=TOP, fill=X, anchor=N)
