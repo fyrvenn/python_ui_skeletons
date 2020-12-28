@@ -20,8 +20,18 @@ def return_error():
 
 class MonthList:
     def __init__(self, r_var, name, parent, i):
-        self.rb = Radiobutton(parent, text=name, bg='light yellow', variable=r_var, value=i)
+        self.rb = Radiobutton(parent, text=name, bg='light yellow', activebackgroun='light yellow',
+                              highlightbackground='light yellow', font=font_std + " italic", variable=r_var, value=i)
         self.rb.pack(side=TOP, anchor=NW)
+
+
+class DaysList:
+    def __init__(self, name, parent):
+        self.flag = BooleanVar()
+        self.flag.set(1)
+        self.chb = Checkbutton(parent, text=name, bg='dark red', activebackground='dark red', highlightbackground="red",
+                               onvalue=1, offvalue=0, variable=self.flag)
+        self.chb.pack(side=TOP, anchor=NW)
 
 
 class MainClass(Frame):
@@ -55,20 +65,28 @@ class MainClass(Frame):
         i = 0
         for month in months_str[1::]:
             i += 1
-            rb = MonthList(r_var, month, self.frame_rb, i)
-            self.month_list.append(rb)
+            self.rb = MonthList(r_var, month, self.frame_rb, i)
+            self.month_list.append(self.rb)
 
-        self.l_chb = Label(self.frame_chb, width=25, height=30, text="Checkbox", bg="dark red")
-        self.l_rb = Label(self.frame_rb, width=25, height=15, text="Radiobutton", bg="yellow")
+        self.f_chb = Frame(self.frame_chb, bg='dark red', bd=5)
+        self.f_chb.pack(side=LEFT, fill=BOTH, anchor=NW)
+        days_str = calendar.day_name
+        self.chb_list = list()
+        for day in days_str:
+            self.chb = DaysList(day, self.f_chb)
+            self.chb.flag.set(1)
+            self.chb_list.append(self.chb)
+
+        self.l_rb = Label(self.frame_rb, width=25, height=15, text="•", bg="yellow")
         self.l_cbb = Label(self.frame_cb, width=25, text="Выбрать:", bg="magenta")
 
-        self.main_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2, text=u"Открыть файл",
-                               fg="white", command=self.open_file)
+        self.main_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2,
+                               text=u"Открыть файл", activebackground='green', fg="white", command=self.open_file)
         self.error_btn = Button(self.frame_footer, font=font_std + " bold", bg="white", fg="red", width=20,
-                                height=2,
+                                height=2, activebackground='red', activeforeground='white',
                                 text=u"Не нажимать!!!", command=return_error)
-        self.quit_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2, text=u"Выход",
-                               fg="white", command=quit_prog)
+        self.quit_btn = Button(self.frame_footer, font=font_std + " bold", bg="dark magenta", width=20, height=2,
+                               text=u"Выход", activebackground='green', fg="white", command=quit_prog)
 
         # Pack
         self.frame_header.pack(side=TOP, fill=X, anchor=N)
@@ -87,7 +105,6 @@ class MainClass(Frame):
         self.cbb.pack(side='top', fill=BOTH)
 
         self.l_header.pack()
-        self.l_chb.pack()
         self.l_rb.pack()
 
     def open_file(self):
