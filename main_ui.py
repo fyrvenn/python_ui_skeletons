@@ -27,7 +27,7 @@ class MonthList:
 
 class DaysList:
     def __init__(self, name, parent):
-        self.flag = BooleanVar()
+        self.flag = IntVar()
         self.flag.set(1)
         self.chb = Checkbutton(parent, text=name, bg='dark red', activebackground='dark red', highlightbackground="red",
                                onvalue=1, offvalue=0, variable=self.flag)
